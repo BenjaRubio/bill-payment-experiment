@@ -1,10 +1,16 @@
-## Resumen
+# MVP Experimento de Recordatorio de Pagos
 
-El experimento consiste en una app en Next dónde se simula el pago de cuentas que están por vencer. Desde el home se puede crear un usuario que pertenezca a cualquiera de los grupos (control o variante), dependiendo de eso ver un banner recordando la cuenta por vencer, y pagar la cuenta respectiva, para luego ver reflejado ese resultado en las métricas.
+Este MVP fue construido para validar la siguiente hipótesis.
 
-## Cómo correr la app
+> "Recordar a un usuario que tiene una cuenta por vencer aumenta la probabilidad de que la pague antes del vencimiento."
 
-En primer lugar, debemos contar con una versión de ```node >= 22```. Deben instalarse dependencias, configurar la base de datos y seedearla. Luego corremos la app:
+Se implementó NextJs con una base de datos SQLite que simula el flujo real, combinando datos históricos simulados para el análisis y un flujo interactivo para pruebas.
+
+
+## 🛠️ Cómo correr la app
+
+En primer lugar, debemos contar con una versión de **node >= 22**.
+Ejecuta los siguientes comandos para instalar dependencias, configurar la base de datos, poblarla con datos de prueba y levantar el entorno local:
 
 ```bash
 npm install
@@ -13,60 +19,73 @@ npm run db:seed
 npm run dev
 ```
 
-## Estructura
-
-{{INSERTAR ESTRUCTURA BASE DE DATOS}}
+*Nota: el archivo ```seed.ts``` precatga 100 usuarios históricos **sesgados** (30% de conversión para el grupo de control, 60% para el grupo variante) para que el dashboard tenga datos para analizar desde un inicio*
 
 
-## Scope
+## 🎯 Scope
 
-El MVP consiste en una aplicación básica con las actions mínimas para poder llevar a cabo el experimento.
+Para mantener el proyecto pequeño y enfocar el esfuerzo en la hipótesis central, se tomaron las siguientes decisiones:
 
-Hay un seed para la base de datos que permite iniciar con métricas ya visibles, pero también se tiene el flujo interactivo de cómo funcionaría en un caso real, con un tiempo más prolongado para medición (2 semanas por ejemplo).
+**Qué se construyó**
 
-La creación de usuarios considera solo el campo relevante para el experimento (grupo), todo lo demás es automático, sin contraseñas ni verificaciones de ningún tipo.
+- **Flujo interactivo:** capacidad de generar usuarios de prueba fácilmente, asignarlos a un grupo y permitirles interactuar con la plataforma.
 
-Se considera también la generación de eventos que permite hacer seguimiento de las acciones del usuario. Los eventos posibles están limitados a las acciones relevantes para el experimento.
+- **Tracking de eventos:** Registro de eventos en la base de datos para hacer seguimiento del comportamiento del usuario (```banner_viewed```, ```bill_paid```).
 
+- **Dashboard de resultados:** Vista mínima para la interpretación de la información basada en el cohorte histórico, con el fin de mostrar las métricas  y gráficos relevantes. En un experiemento real, de producción, probablemente tercerizaría esto.
 
-## Medición
+**Qué se cortó**
 
-Los eventos consideran si el usuario ve el recordatorio (que depende del grupo al cual pertenece), y si pagó su cuenta. Para fines del MVP, sólo se considera una cuenta por usuario, de modo que los eventos no específican una cuenta específica, solo fechas.
+- **Autenticación real:** Se verifica al usuario según su ```id``` en las cookies, sin necesidad de lidiar con contraseñas, y deduplicación y validación de correos.
 
-Así, un recordatorio exitoso sería para aquellos usuarios que registran el evento ```banner_viewed```, posteriormente ```bill_paid```, siendo la fecha de este último, previa a la fecha de expiración de la cuenta.
+- **Múltiples cuentas por usuario:** Se asume una cuenta por vencer para cada usuario, lo que en un escenario real sería más complejo donde un usuario puede tener varias cuentas, algunas pagadas a tiempo y otras no.
 
-Para validar la hipótesis, se vería la tasa de recordatorios exitosos sobre los recordatorios totales; lo cual debe compararse a los pagos exitosos de los usuarios que no recibieron recordatorio, sobre el total de estos que entraron a la plataforma.
-
-CRITERIO DE ÉXITO, ¿diferencia entre ambas tasas?
-
-
-## Diseño y Construcción
-
-Para llevar a cabo el experimento, se creó un esquema en la base de datos donde los usuarios pueden pertencer al grupo de control (sin recordatorio de cuenta por vencer) o al grupo variante (con recordatorio).
-
-Para el experimento, se considera que el grupo de estudio corresponde solo a usuarios que llegaron a la ventana de "por vencer", es decir, con una cuenta sin pagar a menos de tres días de vencer, y que entraron a la plataforma durante el período del estudio. 
-
-Un pago solo se considera exitoso si la fecha del pago de la cuenta es menor o igual a la fecha de expiración de la misma. Si no se registra fecha de pago o es mayor a la de expiración, se considera que el recordatorio no ha funcionado (para usuarios del grupo variante).
-
-También, hay una tabla de eventos en la base de datos, donde se hace seguimiento de las acciones del usuario, es decir, si vieron el banner y si pagaron una cuenta. La importancia está en que se haya pagado la cuenta, habiendo visto el banner previamente.
-
-El script de ```seed.ts``` simula el cohorte de usuarios mencionado. Donde además, a cada usuario se le crea una cuenta ya vencida, aleatoriamente pagada, y los respectivos eventos en consecuencia, con el fin de tener métricas para analizar desde un principio.
-
-{{IDEA DE DURACIÓN DEL EXPERIMENTO}} -> 2 semanas? depende también el número de usuarios y cuentas. definir un número de muestra representativa.
+- **Segmentación:** No se consideran varables como el monto de la deuda, velocidad del pago luego de ver el banner, enfocándome puramente en conversión binaria (pagó o no).
 
 
-## Qué hacer con el resultado
+## 🧪 Diseño del experimento
 
-Considerando que termina el período de prueba definido y se tienen los siguientes escenarios:
+El A/B test está diseñado bajo los siguientes parámetros:
+
+- **Cohorte:** Usuarios que entran a la plataforma y tienen al menos una cuenta sin pagar que vence en máximo 3 días.
+
+- **Grupo de control:** Navegan la plataforma de forma habitual, sin recordatorios especiales.
+
+- **Grupo variante:** Ven un banner destacado en el home que indica que tienen una cuenta próxima de vencer y llama a pagar.
+
+- **Métrica principal:** Tasa de conversión de pago a tiempo.
+
+- **Duración estimada:** 2 semanas, o hasta alcanzar una muestra estadísticamente representativa, dependiendo del tráfico habitual de la plataforma.
+
+
+## 📊 Medición y Criterio de Éxito
+
+Para medir el impacto real y no solo la interacción visual, el cálculo se define así:
+
+- **Atribución:** El usuario del grupo variante debe registrar el evento ```banner_viewed```.
+
+- **Conversión:** El usuario debe registrar el evento ```bill_paid```.
+
+- **Validación de éxito:** la conversión solo es válida si la fecha de pago es menor a la fecha de expiración. Si paga atrasado, o la fecha de expiración paso y no se registra pago, el recordatorio falló.
+
+**Criterio de éxito:** La hipótesis se valida si la tasa de conversión del grupo variante supera a la del grupo de control con un nivel de confianza estadística definido, demostrando que la diferencia no es casualidad.
+
+
+## 🚀 Qué hacer con los resultados
+
+Una vez finalizado el experimento, pueden darse los siguientes escenarios:
 
 ### La hipótesis se valida
+**El grupo variante superó al de control con un nivel de confianza mayor al establecido**
 
-En este caso, a priori buscaría escalar la idea y agregarlo como una funcionalidad definitiva.Iteraría sobre la implementación base del experimento para que quede en producción, evaluaría los costos de implementarla sobre los beneficios que traería y las potenciales formas de enviar un recordatorio (Whatsapp, Email, banner en plataforma, etc). Con ello, vería finalmente si se integra durante uno de los ciclos o no.
+En este caso, buscaría escalar la idea y agregarlo como una funcionalidad definitiva para todos los usuarios. Luego buscaría iterar sobre la implementación, quizas probando con notificaciones push o correos, considerando el costo extra que esto trae y el beneficio estimado.
 
 ### La hipótesis se refuta y hay evidencia de que el recordatorio NO ayuda
+**El grupo de control obtuvo mejores resultados**
 
-Si hay suficiente evidencia de que realmente no hay un cambio, probablemente no vale la pena implementarlo como una funcionalidad, ya que traería costo sin ningún beneficio real.
+Se apaga el experimento, se limpia el código y documentaría las conclusiones y aprendizaje para el futuro (ej. el banner no es llamativo para el usuario; el usuario suele pagar a tiempo independiente del recordatorio o sino simplemente nunca paga; etc).
 
 ### No hay suficiente evidencia para concluir si el recordatorio ayuda o no
+**No hay un nivel de confianza que permita confirmar la hipótesis**
 
-Dependiendo de la cantidad de evidencia rescatada y los resultados preliminares que arroje, podría simplemente matase la idea, o considerar extender el período de prueba. Este tiempo de extensión también depende de la cantidad de evidencia rescatada en razón a cuánta evidencia se considera una muestra representativa.
+Probablemente se apagaría el experimento y se descarta la idea. Aunque, podría evaluarse dependiendo de la cantidad de evidencia rescatada y los resultados preliminares que arroje, y así, tal vez extender el período de prueba.

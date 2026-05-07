@@ -1,6 +1,7 @@
+import Link from 'next/link'
+
 import { ExperimentGroup, TrackingEventEnum } from '@/database/generated/enums'
 
-import { payBill } from '@/app/_actions/bill.action'
 import { trackEvent } from '@/services/tracking-events.service'
 
 type Props = {
@@ -34,14 +35,12 @@ export default async function ExpiringBillBanner({ user }: Props) {
         {urgentBill.expirationDate.toLocaleDateString('es-CL')}. Te recomendamos pagarla
         cuanto antes.
       </p>
-      <form className="mt-4" action={payBill.bind(null, urgentBill.id)}>
-        <button
-          type="submit"
-          className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[var(--accent-hover)]"
-        >
-          Pagar
-        </button>
-      </form>
+      <Link
+        href="/bills"
+        className="mt-4 inline-block rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[var(--accent-hover)]"
+      >
+        ir a pagar
+      </Link>
     </div>
   )
 }
