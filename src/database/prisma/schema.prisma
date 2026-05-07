@@ -26,27 +26,15 @@ model User {
   tracking_events   TrackingEvent[]
 }
 
-enum BillTypeEnum {
-  LIGHT       @map("light")
-}
-
-model BillType {
-  id    Int    @id @default(autoincrement())
-  name  BillTypeEnum
-  bills Bill[]
-}
-
 model Bill {
   id             Int       @id @default(autoincrement())
   userId         Int
-  billTypeId     Int
   emissionDate   DateTime
   expirationDate DateTime
   amount         Float
   paidAt         DateTime?
   
   user           User      @relation(fields: [userId], references: [id])
-  billType       BillType  @relation(fields: [billTypeId], references: [id])
 }
 
 enum TrackingEventEnum {

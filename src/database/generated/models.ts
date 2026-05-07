@@ -9,7 +9,6 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
-export type * from './models/BillType'
 export type * from './models/Bill'
 export type * from './models/TrackingEvent'
 export type * from './commonInputTypes'

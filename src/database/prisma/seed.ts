@@ -1,8 +1,7 @@
-import { BillTypeEnum, ExperimentGroup, TrackingEventEnum } from '../generated/enums'
+import { ExperimentGroup, TrackingEventEnum } from '../generated/enums'
 import prisma from '../client';
 
 async function main() {
-  const lightBill = await prisma.billType.create({ data: { name: BillTypeEnum.LIGHT } })
   const today = new Date()
 
   // 2. Create 100 users (50 CONTROL, 50 VARIANT)
@@ -36,7 +35,6 @@ async function main() {
     await prisma.bill.create({
       data: {
         userId: user.id,
-        billTypeId: lightBill.id,
         emissionDate: emissionDate,
         expirationDate: passedExpirationDate,
         amount: Math.floor(Math.random() * 50000) + 10000,

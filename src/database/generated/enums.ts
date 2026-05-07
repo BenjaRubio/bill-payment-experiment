@@ -17,13 +17,6 @@ export const ExperimentGroup = {
 export type ExperimentGroup = (typeof ExperimentGroup)[keyof typeof ExperimentGroup]
 
 
-export const BillTypeEnum = {
-  LIGHT: 'LIGHT'
-} as const
-
-export type BillTypeEnum = (typeof BillTypeEnum)[keyof typeof BillTypeEnum]
-
-
 export const TrackingEventEnum = {
   BANNER_VIEWED: 'BANNER_VIEWED',
   BILL_PAID: 'BILL_PAID'

@@ -29,21 +29,18 @@ export type AggregateBill = {
 export type BillAvgAggregateOutputType = {
   id: number | null
   userId: number | null
-  billTypeId: number | null
   amount: number | null
 }
 
 export type BillSumAggregateOutputType = {
   id: number | null
   userId: number | null
-  billTypeId: number | null
   amount: number | null
 }
 
 export type BillMinAggregateOutputType = {
   id: number | null
   userId: number | null
-  billTypeId: number | null
   emissionDate: Date | null
   expirationDate: Date | null
   amount: number | null
@@ -53,7 +50,6 @@ export type BillMinAggregateOutputType = {
 export type BillMaxAggregateOutputType = {
   id: number | null
   userId: number | null
-  billTypeId: number | null
   emissionDate: Date | null
   expirationDate: Date | null
   amount: number | null
@@ -63,7 +59,6 @@ export type BillMaxAggregateOutputType = {
 export type BillCountAggregateOutputType = {
   id: number
   userId: number
-  billTypeId: number
   emissionDate: number
   expirationDate: number
   amount: number
@@ -75,21 +70,18 @@ export type BillCountAggregateOutputType = {
 export type BillAvgAggregateInputType = {
   id?: true
   userId?: true
-  billTypeId?: true
   amount?: true
 }
 
 export type BillSumAggregateInputType = {
   id?: true
   userId?: true
-  billTypeId?: true
   amount?: true
 }
 
 export type BillMinAggregateInputType = {
   id?: true
   userId?: true
-  billTypeId?: true
   emissionDate?: true
   expirationDate?: true
   amount?: true
@@ -99,7 +91,6 @@ export type BillMinAggregateInputType = {
 export type BillMaxAggregateInputType = {
   id?: true
   userId?: true
-  billTypeId?: true
   emissionDate?: true
   expirationDate?: true
   amount?: true
@@ -109,7 +100,6 @@ export type BillMaxAggregateInputType = {
 export type BillCountAggregateInputType = {
   id?: true
   userId?: true
-  billTypeId?: true
   emissionDate?: true
   expirationDate?: true
   amount?: true
@@ -206,7 +196,6 @@ export type BillGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type BillGroupByOutputType = {
   id: number
   userId: number
-  billTypeId: number
   emissionDate: Date
   expirationDate: Date
   amount: number
@@ -239,25 +228,21 @@ export type BillWhereInput = {
   NOT?: Prisma.BillWhereInput | Prisma.BillWhereInput[]
   id?: Prisma.IntFilter<"Bill"> | number
   userId?: Prisma.IntFilter<"Bill"> | number
-  billTypeId?: Prisma.IntFilter<"Bill"> | number
   emissionDate?: Prisma.DateTimeFilter<"Bill"> | Date | string
   expirationDate?: Prisma.DateTimeFilter<"Bill"> | Date | string
   amount?: Prisma.FloatFilter<"Bill"> | number
   paidAt?: Prisma.DateTimeNullableFilter<"Bill"> | Date | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  billType?: Prisma.XOR<Prisma.BillTypeScalarRelationFilter, Prisma.BillTypeWhereInput>
 }
 
 export type BillOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  billTypeId?: Prisma.SortOrder
   emissionDate?: Prisma.SortOrder
   expirationDate?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   paidAt?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
-  billType?: Prisma.BillTypeOrderByWithRelationInput
 }
 
 export type BillWhereUniqueInput = Prisma.AtLeast<{
@@ -266,19 +251,16 @@ export type BillWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.BillWhereInput[]
   NOT?: Prisma.BillWhereInput | Prisma.BillWhereInput[]
   userId?: Prisma.IntFilter<"Bill"> | number
-  billTypeId?: Prisma.IntFilter<"Bill"> | number
   emissionDate?: Prisma.DateTimeFilter<"Bill"> | Date | string
   expirationDate?: Prisma.DateTimeFilter<"Bill"> | Date | string
   amount?: Prisma.FloatFilter<"Bill"> | number
   paidAt?: Prisma.DateTimeNullableFilter<"Bill"> | Date | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  billType?: Prisma.XOR<Prisma.BillTypeScalarRelationFilter, Prisma.BillTypeWhereInput>
 }, "id">
 
 export type BillOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  billTypeId?: Prisma.SortOrder
   emissionDate?: Prisma.SortOrder
   expirationDate?: Prisma.SortOrder
   amount?: Prisma.SortOrder
@@ -296,7 +278,6 @@ export type BillScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BillScalarWhereWithAggregatesInput | Prisma.BillScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Bill"> | number
   userId?: Prisma.IntWithAggregatesFilter<"Bill"> | number
-  billTypeId?: Prisma.IntWithAggregatesFilter<"Bill"> | number
   emissionDate?: Prisma.DateTimeWithAggregatesFilter<"Bill"> | Date | string
   expirationDate?: Prisma.DateTimeWithAggregatesFilter<"Bill"> | Date | string
   amount?: Prisma.FloatWithAggregatesFilter<"Bill"> | number
@@ -309,13 +290,11 @@ export type BillCreateInput = {
   amount: number
   paidAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutBillsInput
-  billType: Prisma.BillTypeCreateNestedOneWithoutBillsInput
 }
 
 export type BillUncheckedCreateInput = {
   id?: number
   userId: number
-  billTypeId: number
   emissionDate: Date | string
   expirationDate: Date | string
   amount: number
@@ -328,13 +307,11 @@ export type BillUpdateInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutBillsNestedInput
-  billType?: Prisma.BillTypeUpdateOneRequiredWithoutBillsNestedInput
 }
 
 export type BillUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  billTypeId?: Prisma.IntFieldUpdateOperationsInput | number
   emissionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expirationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -344,7 +321,6 @@ export type BillUncheckedUpdateInput = {
 export type BillCreateManyInput = {
   id?: number
   userId: number
-  billTypeId: number
   emissionDate: Date | string
   expirationDate: Date | string
   amount: number
@@ -361,7 +337,6 @@ export type BillUpdateManyMutationInput = {
 export type BillUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  billTypeId?: Prisma.IntFieldUpdateOperationsInput | number
   emissionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expirationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -381,7 +356,6 @@ export type BillOrderByRelationAggregateInput = {
 export type BillCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  billTypeId?: Prisma.SortOrder
   emissionDate?: Prisma.SortOrder
   expirationDate?: Prisma.SortOrder
   amount?: Prisma.SortOrder
@@ -391,14 +365,12 @@ export type BillCountOrderByAggregateInput = {
 export type BillAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  billTypeId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
 export type BillMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  billTypeId?: Prisma.SortOrder
   emissionDate?: Prisma.SortOrder
   expirationDate?: Prisma.SortOrder
   amount?: Prisma.SortOrder
@@ -408,7 +380,6 @@ export type BillMaxOrderByAggregateInput = {
 export type BillMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  billTypeId?: Prisma.SortOrder
   emissionDate?: Prisma.SortOrder
   expirationDate?: Prisma.SortOrder
   amount?: Prisma.SortOrder
@@ -418,7 +389,6 @@ export type BillMinOrderByAggregateInput = {
 export type BillSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  billTypeId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
@@ -464,48 +434,6 @@ export type BillUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.BillScalarWhereInput | Prisma.BillScalarWhereInput[]
 }
 
-export type BillCreateNestedManyWithoutBillTypeInput = {
-  create?: Prisma.XOR<Prisma.BillCreateWithoutBillTypeInput, Prisma.BillUncheckedCreateWithoutBillTypeInput> | Prisma.BillCreateWithoutBillTypeInput[] | Prisma.BillUncheckedCreateWithoutBillTypeInput[]
-  connectOrCreate?: Prisma.BillCreateOrConnectWithoutBillTypeInput | Prisma.BillCreateOrConnectWithoutBillTypeInput[]
-  createMany?: Prisma.BillCreateManyBillTypeInputEnvelope
-  connect?: Prisma.BillWhereUniqueInput | Prisma.BillWhereUniqueInput[]
-}
-
-export type BillUncheckedCreateNestedManyWithoutBillTypeInput = {
-  create?: Prisma.XOR<Prisma.BillCreateWithoutBillTypeInput, Prisma.BillUncheckedCreateWithoutBillTypeInput> | Prisma.BillCreateWithoutBillTypeInput[] | Prisma.BillUncheckedCreateWithoutBillTypeInput[]
-  connectOrCreate?: Prisma.BillCreateOrConnectWithoutBillTypeInput | Prisma.BillCreateOrConnectWithoutBillTypeInput[]
-  createMany?: Prisma.BillCreateManyBillTypeInputEnvelope
-  connect?: Prisma.BillWhereUniqueInput | Prisma.BillWhereUniqueInput[]
-}
-
-export type BillUpdateManyWithoutBillTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.BillCreateWithoutBillTypeInput, Prisma.BillUncheckedCreateWithoutBillTypeInput> | Prisma.BillCreateWithoutBillTypeInput[] | Prisma.BillUncheckedCreateWithoutBillTypeInput[]
-  connectOrCreate?: Prisma.BillCreateOrConnectWithoutBillTypeInput | Prisma.BillCreateOrConnectWithoutBillTypeInput[]
-  upsert?: Prisma.BillUpsertWithWhereUniqueWithoutBillTypeInput | Prisma.BillUpsertWithWhereUniqueWithoutBillTypeInput[]
-  createMany?: Prisma.BillCreateManyBillTypeInputEnvelope
-  set?: Prisma.BillWhereUniqueInput | Prisma.BillWhereUniqueInput[]
-  disconnect?: Prisma.BillWhereUniqueInput | Prisma.BillWhereUniqueInput[]
-  delete?: Prisma.BillWhereUniqueInput | Prisma.BillWhereUniqueInput[]
-  connect?: Prisma.BillWhereUniqueInput | Prisma.BillWhereUniqueInput[]
-  update?: Prisma.BillUpdateWithWhereUniqueWithoutBillTypeInput | Prisma.BillUpdateWithWhereUniqueWithoutBillTypeInput[]
-  updateMany?: Prisma.BillUpdateManyWithWhereWithoutBillTypeInput | Prisma.BillUpdateManyWithWhereWithoutBillTypeInput[]
-  deleteMany?: Prisma.BillScalarWhereInput | Prisma.BillScalarWhereInput[]
-}
-
-export type BillUncheckedUpdateManyWithoutBillTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.BillCreateWithoutBillTypeInput, Prisma.BillUncheckedCreateWithoutBillTypeInput> | Prisma.BillCreateWithoutBillTypeInput[] | Prisma.BillUncheckedCreateWithoutBillTypeInput[]
-  connectOrCreate?: Prisma.BillCreateOrConnectWithoutBillTypeInput | Prisma.BillCreateOrConnectWithoutBillTypeInput[]
-  upsert?: Prisma.BillUpsertWithWhereUniqueWithoutBillTypeInput | Prisma.BillUpsertWithWhereUniqueWithoutBillTypeInput[]
-  createMany?: Prisma.BillCreateManyBillTypeInputEnvelope
-  set?: Prisma.BillWhereUniqueInput | Prisma.BillWhereUniqueInput[]
-  disconnect?: Prisma.BillWhereUniqueInput | Prisma.BillWhereUniqueInput[]
-  delete?: Prisma.BillWhereUniqueInput | Prisma.BillWhereUniqueInput[]
-  connect?: Prisma.BillWhereUniqueInput | Prisma.BillWhereUniqueInput[]
-  update?: Prisma.BillUpdateWithWhereUniqueWithoutBillTypeInput | Prisma.BillUpdateWithWhereUniqueWithoutBillTypeInput[]
-  updateMany?: Prisma.BillUpdateManyWithWhereWithoutBillTypeInput | Prisma.BillUpdateManyWithWhereWithoutBillTypeInput[]
-  deleteMany?: Prisma.BillScalarWhereInput | Prisma.BillScalarWhereInput[]
-}
-
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
@@ -527,12 +455,10 @@ export type BillCreateWithoutUserInput = {
   expirationDate: Date | string
   amount: number
   paidAt?: Date | string | null
-  billType: Prisma.BillTypeCreateNestedOneWithoutBillsInput
 }
 
 export type BillUncheckedCreateWithoutUserInput = {
   id?: number
-  billTypeId: number
   emissionDate: Date | string
   expirationDate: Date | string
   amount: number
@@ -570,58 +496,14 @@ export type BillScalarWhereInput = {
   NOT?: Prisma.BillScalarWhereInput | Prisma.BillScalarWhereInput[]
   id?: Prisma.IntFilter<"Bill"> | number
   userId?: Prisma.IntFilter<"Bill"> | number
-  billTypeId?: Prisma.IntFilter<"Bill"> | number
   emissionDate?: Prisma.DateTimeFilter<"Bill"> | Date | string
   expirationDate?: Prisma.DateTimeFilter<"Bill"> | Date | string
   amount?: Prisma.FloatFilter<"Bill"> | number
   paidAt?: Prisma.DateTimeNullableFilter<"Bill"> | Date | string | null
 }
 
-export type BillCreateWithoutBillTypeInput = {
-  emissionDate: Date | string
-  expirationDate: Date | string
-  amount: number
-  paidAt?: Date | string | null
-  user: Prisma.UserCreateNestedOneWithoutBillsInput
-}
-
-export type BillUncheckedCreateWithoutBillTypeInput = {
-  id?: number
-  userId: number
-  emissionDate: Date | string
-  expirationDate: Date | string
-  amount: number
-  paidAt?: Date | string | null
-}
-
-export type BillCreateOrConnectWithoutBillTypeInput = {
-  where: Prisma.BillWhereUniqueInput
-  create: Prisma.XOR<Prisma.BillCreateWithoutBillTypeInput, Prisma.BillUncheckedCreateWithoutBillTypeInput>
-}
-
-export type BillCreateManyBillTypeInputEnvelope = {
-  data: Prisma.BillCreateManyBillTypeInput | Prisma.BillCreateManyBillTypeInput[]
-}
-
-export type BillUpsertWithWhereUniqueWithoutBillTypeInput = {
-  where: Prisma.BillWhereUniqueInput
-  update: Prisma.XOR<Prisma.BillUpdateWithoutBillTypeInput, Prisma.BillUncheckedUpdateWithoutBillTypeInput>
-  create: Prisma.XOR<Prisma.BillCreateWithoutBillTypeInput, Prisma.BillUncheckedCreateWithoutBillTypeInput>
-}
-
-export type BillUpdateWithWhereUniqueWithoutBillTypeInput = {
-  where: Prisma.BillWhereUniqueInput
-  data: Prisma.XOR<Prisma.BillUpdateWithoutBillTypeInput, Prisma.BillUncheckedUpdateWithoutBillTypeInput>
-}
-
-export type BillUpdateManyWithWhereWithoutBillTypeInput = {
-  where: Prisma.BillScalarWhereInput
-  data: Prisma.XOR<Prisma.BillUpdateManyMutationInput, Prisma.BillUncheckedUpdateManyWithoutBillTypeInput>
-}
-
 export type BillCreateManyUserInput = {
   id?: number
-  billTypeId: number
   emissionDate: Date | string
   expirationDate: Date | string
   amount: number
@@ -633,12 +515,10 @@ export type BillUpdateWithoutUserInput = {
   expirationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  billType?: Prisma.BillTypeUpdateOneRequiredWithoutBillsNestedInput
 }
 
 export type BillUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  billTypeId?: Prisma.IntFieldUpdateOperationsInput | number
   emissionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expirationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -647,42 +527,6 @@ export type BillUncheckedUpdateWithoutUserInput = {
 
 export type BillUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  billTypeId?: Prisma.IntFieldUpdateOperationsInput | number
-  emissionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  expirationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-}
-
-export type BillCreateManyBillTypeInput = {
-  id?: number
-  userId: number
-  emissionDate: Date | string
-  expirationDate: Date | string
-  amount: number
-  paidAt?: Date | string | null
-}
-
-export type BillUpdateWithoutBillTypeInput = {
-  emissionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  expirationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  user?: Prisma.UserUpdateOneRequiredWithoutBillsNestedInput
-}
-
-export type BillUncheckedUpdateWithoutBillTypeInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  emissionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  expirationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  amount?: Prisma.FloatFieldUpdateOperationsInput | number
-  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-}
-
-export type BillUncheckedUpdateManyWithoutBillTypeInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
   emissionDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expirationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -694,73 +538,61 @@ export type BillUncheckedUpdateManyWithoutBillTypeInput = {
 export type BillSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  billTypeId?: boolean
   emissionDate?: boolean
   expirationDate?: boolean
   amount?: boolean
   paidAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  billType?: boolean | Prisma.BillTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["bill"]>
 
 export type BillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  billTypeId?: boolean
   emissionDate?: boolean
   expirationDate?: boolean
   amount?: boolean
   paidAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  billType?: boolean | Prisma.BillTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["bill"]>
 
 export type BillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
-  billTypeId?: boolean
   emissionDate?: boolean
   expirationDate?: boolean
   amount?: boolean
   paidAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  billType?: boolean | Prisma.BillTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["bill"]>
 
 export type BillSelectScalar = {
   id?: boolean
   userId?: boolean
-  billTypeId?: boolean
   emissionDate?: boolean
   expirationDate?: boolean
   amount?: boolean
   paidAt?: boolean
 }
 
-export type BillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "billTypeId" | "emissionDate" | "expirationDate" | "amount" | "paidAt", ExtArgs["result"]["bill"]>
+export type BillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "emissionDate" | "expirationDate" | "amount" | "paidAt", ExtArgs["result"]["bill"]>
 export type BillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  billType?: boolean | Prisma.BillTypeDefaultArgs<ExtArgs>
 }
 export type BillIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  billType?: boolean | Prisma.BillTypeDefaultArgs<ExtArgs>
 }
 export type BillIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  billType?: boolean | Prisma.BillTypeDefaultArgs<ExtArgs>
 }
 
 export type $BillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Bill"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
-    billType: Prisma.$BillTypePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     userId: number
-    billTypeId: number
     emissionDate: Date
     expirationDate: Date
     amount: number
@@ -1160,7 +992,6 @@ readonly fields: BillFieldRefs;
 export interface Prisma__BillClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  billType<T extends Prisma.BillTypeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BillTypeDefaultArgs<ExtArgs>>): Prisma.Prisma__BillTypeClient<runtime.Types.Result.GetResult<Prisma.$BillTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1192,7 +1023,6 @@ export interface Prisma__BillClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface BillFieldRefs {
   readonly id: Prisma.FieldRef<"Bill", 'Int'>
   readonly userId: Prisma.FieldRef<"Bill", 'Int'>
-  readonly billTypeId: Prisma.FieldRef<"Bill", 'Int'>
   readonly emissionDate: Prisma.FieldRef<"Bill", 'DateTime'>
   readonly expirationDate: Prisma.FieldRef<"Bill", 'DateTime'>
   readonly amount: Prisma.FieldRef<"Bill", 'Float'>

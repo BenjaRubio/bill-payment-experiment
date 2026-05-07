@@ -89,23 +89,6 @@ export type EnumExperimentGroupWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumExperimentGroupFilter<$PrismaModel>
 }
 
-export type EnumBillTypeEnumFilter<$PrismaModel = never> = {
-  equals?: $Enums.BillTypeEnum | Prisma.EnumBillTypeEnumFieldRefInput<$PrismaModel>
-  in?: $Enums.BillTypeEnum[]
-  notIn?: $Enums.BillTypeEnum[]
-  not?: Prisma.NestedEnumBillTypeEnumFilter<$PrismaModel> | $Enums.BillTypeEnum
-}
-
-export type EnumBillTypeEnumWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.BillTypeEnum | Prisma.EnumBillTypeEnumFieldRefInput<$PrismaModel>
-  in?: $Enums.BillTypeEnum[]
-  notIn?: $Enums.BillTypeEnum[]
-  not?: Prisma.NestedEnumBillTypeEnumWithAggregatesFilter<$PrismaModel> | $Enums.BillTypeEnum
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumBillTypeEnumFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumBillTypeEnumFilter<$PrismaModel>
-}
-
 export type DateTimeFilter<$PrismaModel = never> = {
   equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   in?: Date[] | string[]
@@ -272,23 +255,6 @@ export type NestedEnumExperimentGroupWithAggregatesFilter<$PrismaModel = never> 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumExperimentGroupFilter<$PrismaModel>
   _max?: Prisma.NestedEnumExperimentGroupFilter<$PrismaModel>
-}
-
-export type NestedEnumBillTypeEnumFilter<$PrismaModel = never> = {
-  equals?: $Enums.BillTypeEnum | Prisma.EnumBillTypeEnumFieldRefInput<$PrismaModel>
-  in?: $Enums.BillTypeEnum[]
-  notIn?: $Enums.BillTypeEnum[]
-  not?: Prisma.NestedEnumBillTypeEnumFilter<$PrismaModel> | $Enums.BillTypeEnum
-}
-
-export type NestedEnumBillTypeEnumWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.BillTypeEnum | Prisma.EnumBillTypeEnumFieldRefInput<$PrismaModel>
-  in?: $Enums.BillTypeEnum[]
-  notIn?: $Enums.BillTypeEnum[]
-  not?: Prisma.NestedEnumBillTypeEnumWithAggregatesFilter<$PrismaModel> | $Enums.BillTypeEnum
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumBillTypeEnumFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumBillTypeEnumFilter<$PrismaModel>
 }
 
 export type NestedDateTimeFilter<$PrismaModel = never> = {

@@ -385,7 +385,6 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  BillType: 'BillType',
   Bill: 'Bill',
   TrackingEvent: 'TrackingEvent'
 } as const
@@ -403,7 +402,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "billType" | "bill" | "trackingEvent"
+    modelProps: "user" | "bill" | "trackingEvent"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -478,80 +477,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
-        }
-      }
-    }
-    BillType: {
-      payload: Prisma.$BillTypePayload<ExtArgs>
-      fields: Prisma.BillTypeFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.BillTypeFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillTypePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.BillTypeFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillTypePayload>
-        }
-        findFirst: {
-          args: Prisma.BillTypeFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillTypePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.BillTypeFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillTypePayload>
-        }
-        findMany: {
-          args: Prisma.BillTypeFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillTypePayload>[]
-        }
-        create: {
-          args: Prisma.BillTypeCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillTypePayload>
-        }
-        createMany: {
-          args: Prisma.BillTypeCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.BillTypeCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillTypePayload>[]
-        }
-        delete: {
-          args: Prisma.BillTypeDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillTypePayload>
-        }
-        update: {
-          args: Prisma.BillTypeUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillTypePayload>
-        }
-        deleteMany: {
-          args: Prisma.BillTypeDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.BillTypeUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.BillTypeUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillTypePayload>[]
-        }
-        upsert: {
-          args: Prisma.BillTypeUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BillTypePayload>
-        }
-        aggregate: {
-          args: Prisma.BillTypeAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateBillType>
-        }
-        groupBy: {
-          args: Prisma.BillTypeGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.BillTypeGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.BillTypeCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.BillTypeCountAggregateOutputType> | number
         }
       }
     }
@@ -749,18 +674,9 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const BillTypeScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-} as const
-
-export type BillTypeScalarFieldEnum = (typeof BillTypeScalarFieldEnum)[keyof typeof BillTypeScalarFieldEnum]
-
-
 export const BillScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  billTypeId: 'billTypeId',
   emissionDate: 'emissionDate',
   expirationDate: 'expirationDate',
   amount: 'amount',
@@ -820,13 +736,6 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'ExperimentGroup'
  */
 export type EnumExperimentGroupFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExperimentGroup'>
-    
-
-
-/**
- * Reference to a field of type 'BillTypeEnum'
- */
-export type EnumBillTypeEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillTypeEnum'>
     
 
 
@@ -954,7 +863,6 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
-  billType?: Prisma.BillTypeOmit
   bill?: Prisma.BillOmit
   trackingEvent?: Prisma.TrackingEventOmit
 }
