@@ -75,17 +75,17 @@ Para medir el impacto real y no solo la interacción visual, el cálculo se defi
 
 Una vez finalizado el experimento, pueden darse los siguientes escenarios:
 
-### La hipótesis se valida
+- ### La hipótesis se valida
 **El grupo variante superó al de control con un nivel de confianza mayor al establecido**
 
 En este caso, buscaría escalar la idea y agregarlo como una funcionalidad definitiva para todos los usuarios. Luego buscaría iterar sobre la implementación, quizas probando con notificaciones push o correos, considerando el costo extra que esto trae y el beneficio estimado.
 
-### La hipótesis se refuta y hay evidencia de que el recordatorio NO ayuda
+- ### La hipótesis se refuta y hay evidencia de que el recordatorio NO ayuda
 **El grupo de control obtuvo mejores resultados**
 
 Se apaga el experimento, se limpia el código y documentaría las conclusiones y aprendizaje para el futuro (ej. el banner no es llamativo para el usuario; el usuario suele pagar a tiempo independiente del recordatorio o sino simplemente nunca paga; etc).
 
-### No hay suficiente evidencia para concluir si el recordatorio ayuda o no
+- ### No hay suficiente evidencia para concluir si el recordatorio ayuda o no
 **No hay un nivel de confianza que permita confirmar la hipótesis**
 
 Probablemente se apagaría el experimento y se descarta la idea. Aunque, podría evaluarse dependiendo de la cantidad de evidencia rescatada y los resultados preliminares que arroje, y así, tal vez extender el período de prueba.
