@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum ExperimentGroup {
+  CONTROL  @map("control")  // doesn't receive a reminder
+  VARIANT  @map("variant")  // receives a reminder 
+}
+
+model User {
+  id                Int               @id @default(autoincrement())
+  name              String
+  email             String            @unique
+  experimentGroup   ExperimentGroup
+  bills             Bill[]
+  tracking_events   TrackingEvent[]
+}
+
+enum BillTypeEnum {
+  LIGHT       @map("light")
+}
+
+model BillType {
+  id    Int    @id @default(autoincrement())
+  name  BillTypeEnum
+  bills Bill[]
+}
+
+model Bill {
+  id             Int       @id @default(autoincrement())
+  userId         Int
+  billTypeId     Int
+  emissionDate   DateTime
+  expirationDate DateTime
+  amount         Float
+  paidAt         DateTime?
+  
+  user           User      @relation(fields: [userId], references: [id])
+  billType       BillType  @relation(fields: [billTypeId], references: [id])
+}
+
+enum TrackingEventEnum {
+  BANNER_VIEWED     @map("banner_viewed")
+  BILL_PAID         @map("bill_paid")
+}
+
+model TrackingEvent {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  eventName String   
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+}
